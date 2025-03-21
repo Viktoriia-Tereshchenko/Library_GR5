@@ -112,7 +112,6 @@ public class Menu {
                 waitRead();
                 break;
 
-
             default:
                 System.out.println("Сделайте корректный выбор!");
                 waitRead();
