@@ -17,15 +17,16 @@ public class Menu {
         showMenu();
     }
 
+
+
     private void showMenu() {
         while (true) {
             System.out.println("Добро пожаловать в меню библиотеки \"Знания Века\"");
-            System.out.println("1. Меню читателя");
-            System.out.println("2. Меню библиотекаря");
-            System.out.println("3. Меню книг");
+            System.out.println("1. Каталог книг");
+            System.out.println("2. Авторизация / Регистрация ");
             System.out.println("0. Выход");
 
-            System.out.println("Сделайте, пожалуйста, выбор");
+            System.out.println("\nСделайте, пожалуйста, выбор");
             int choice = scanner.nextInt();
             scanner.nextLine();
 
@@ -34,9 +35,15 @@ public class Menu {
                 System.exit(0);
             }
 
-            showSubMenu(choice);
+            //showSubMenu(choice);
         }
     }
+
+    // подменю Каталог книг
+
+/*
+
+
 
     private void showSubMenu(int choice) {
         switch (choice) {
@@ -160,6 +167,10 @@ public class Menu {
         System.out.println("\nДля продолжения нажмите Enter...");
         scanner.nextLine();
     }
+
+    */
+
+
 
 
 }

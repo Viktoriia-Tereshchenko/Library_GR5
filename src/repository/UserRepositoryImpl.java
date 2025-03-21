@@ -20,17 +20,17 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     private  void  addUsers() {
-        User admin = new User(currentId.getAndIncrement(), "1", "1");
+        User admin = new User(currentId.getAndIncrement(), "ADMIN Oleg","1", "1");
         admin.setRole(Role.ADMIN);
 
-        User user = new User(currentId.getAndIncrement(), "2", "2");
+        User user = new User(currentId.getAndIncrement(), "User Ivan","2", "2");
         admin.setRole(Role.READER);
 
         users.addAll(admin, user);
     }
 
     @Override
-    public User addUser(String email, String password) {
+    public User addUser(String name, String email, String password) {
         return null;
     }
 
@@ -45,9 +45,10 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public boolean updatePassword(String email, String newPassword) {
+    public boolean updatePassword(String name, String email, String newPassword) {
         return false;
     }
+
 
     @Override
     public boolean deleteUser(int id) {
