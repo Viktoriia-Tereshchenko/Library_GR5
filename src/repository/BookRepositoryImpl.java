@@ -47,8 +47,14 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public Book getByTitle(String title) {
+        for (Book book : this.books) {
+            if (book.getTitle().toLowerCase().contains(title.toLowerCase())) {
+                return book;
+            }
+        }
         return null;
     }
+
 
     @Override
     public List<Book> getByAuthor(String author) {
@@ -63,24 +69,25 @@ public class BookRepositoryImpl implements BookRepository {
         return result;
     }
 
-    @Override
-    public MyList<Book> getAllFreeBooks() {
-        return null;
+
+        @Override
+        public MyList<Book> getAllFreeBooks () {
+            return null;
+        }
+
+        @Override
+        public MyList<Book> getAllBusyBooks () {
+            return null;
+        }
+
+        //  Редактирование информации о книге (только ADMIN)
+        @Override
+        public void saveBook (Book book){
+
+        }
+
+        @Override
+        public void deleteById ( int id){
+
+        }
     }
-
-    @Override
-    public MyList<Book> getAllBusyBooks() {
-        return null;
-    }
-
-    //  Редактирование информации о книге (только ADMIN)
-    @Override
-    public void saveBook(Book book) {
-
-    }
-
-    @Override
-    public void deleteById(int id) {
-
-    }
-}
