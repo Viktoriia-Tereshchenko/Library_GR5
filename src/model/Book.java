@@ -22,14 +22,7 @@ public class Book {
     // TODO переделать Stringformat
     @Override
     public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", edition='" + edition + '\'' +
-                ", year=" + year +
-                ", isInHand=" + isInHand +
-                '}';
+        return  String.format("Книга: Номер - %d Название - %s Автор - %s Издание - %s Год издания - %d В наличии - %s", id, title, author, edition, year, !isInHand);
     }
 
     @Override
