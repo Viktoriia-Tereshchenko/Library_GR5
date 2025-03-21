@@ -106,7 +106,7 @@ public class MeinServiceImpl implements MeinService {
     }
 
     @Override
-    public Book getByTitle(String title) {
+    public MyList<Book> getByTitle(String title) {
         if (title == null || title.length() == 0){
             return null;
         }
