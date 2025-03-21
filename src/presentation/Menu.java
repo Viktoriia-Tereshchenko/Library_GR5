@@ -1,6 +1,8 @@
 package presentation;
 
+import model.Book;
 import service.MeinService;
+import utils.MyList;
 
 import java.util.Scanner;
 
@@ -76,16 +78,39 @@ public class Menu {
 
         switch (choice) {
             case 1:
-                // TODO Реализация - Список всех книг
                 System.out.println("Реализация - Список всех книг");
+                service.getAllBooks();
+                waitRead();
                 break;
             case 2:
-                // TODO Реализация - Поиск книги по названию
-                System.out.println("Реализация - Поиск книги по названию");
+                System.out.println("Поиск книги по названию");
+                System.out.println("Введите название книги:");
+
+                //System.out.println("Сделайте, пожалуйста, выбор");
+                String input = scanner.nextLine();
+
+                Book result = service.getByTitle(input);
+
+                if (result == null) {
+                    System.out.println("Книга не найдена!");
+                } else {
+                    System.out.println(result.toString());
+                }
+                waitRead();
                 break;
             case 3:
                 // TODO Реализация - Поиск книги по автору
-                System.out.println("Реализация - Поиск книги по автору");
+                /*
+                String input = scanner.nextLine();
+                MyList<Book> result = service.getByAuthor(input);
+
+                if (result == null) {
+                    System.out.println("Книга не найдена!");
+                } else {
+                    System.out.println(result.toString());
+                }
+                waitRead();
+                */
                 break;
             default:
                 System.out.println("Сделайте корректный выбор!");
