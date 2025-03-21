@@ -6,12 +6,13 @@ import model.User;
 import utils.MyArrayList;
 import utils.MyList;
 
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class UserRepositoryImpl implements UserRepository {
 
     // список пользователей при запуске программы
-    private  final MyList<User> users;
+    private final MyList<User> users;
 
     private final AtomicInteger currentId = new AtomicInteger(1);
 
@@ -20,19 +21,21 @@ public class UserRepositoryImpl implements UserRepository {
         addUsers();
     }
 
-    private  void  addUsers() {
-        User admin = new User(currentId.getAndIncrement(), "ADMIN Oleg","1", "1");
+    private void addUsers() {
+        User admin = new User(currentId.getAndIncrement(), "ADMIN Oleg", "1", "1");
         admin.setRole(Role.ADMIN);
 
-        User user = new User(currentId.getAndIncrement(), "User Ivan","2", "2");
-        admin.setRole(Role.READER);
+        User user = new User(currentId.getAndIncrement(), "User Ivan", "2", "2");
+        user.setRole(Role.READER);
 
         users.addAll(admin, user);
     }
 
     @Override
     public User addUser(String name, String email, String password) {
-        return null;
+        User user = new User(currentId.getAndIncrement(), name, email, password);
+        users.add(user);
+        return user;
     }
 
     @Override
@@ -42,6 +45,11 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User getUserByEmail(String email) {
+        for (User user : users) {
+            if (Objects.equals(user.getEmail(), email)) {
+                return user;
+            }
+        }
         return null;
     }
 

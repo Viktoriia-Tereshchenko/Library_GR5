@@ -16,7 +16,7 @@ public interface MeinService {
     Book getByTitle(String title);
 
     //  автору (полное имя или часть имени)
-    List<Book> getByAuthor(String author);
+    MyList<Book> getByAuthor(String author);
 
     // Список книг, которые сейчас у пользователя - репозиторий ?
     MyList<Book> getUserBooks(int id);
@@ -34,7 +34,7 @@ public interface MeinService {
 
 
     //  Регистрация пользователя
-    User registerUser(String email, String password);
+    User registerUser(String name, String email, String password);
 
     // Авторизация пользователей
     boolean loginUser(String email, String password);
@@ -53,5 +53,7 @@ public interface MeinService {
 
     // Посмотреть у кого находится книга, если занята
     User getUserWhoTakeBook(int Id);
+
+    User getActiveUser();
 }
 

@@ -1,7 +1,10 @@
 package presentation;
 
 import model.Book;
+import model.Role;
+import model.User;
 import service.MeinService;
+import utils.MyArrayList;
 import utils.MyList;
 
 import java.util.Scanner;
@@ -42,11 +45,9 @@ public class Menu {
     private void showSubMenu(int choice) {
         switch (choice) {
             case 1:
-                // TODO - Каталог книг
                 showCatalogBookMenu();
                 break;
             case 2:
-                // TODO - Авторизация / Регистрация
                 showAuthorizationMenu();
                 break;
             default:
@@ -64,12 +65,10 @@ public class Menu {
             System.out.println("3. Поиск книги по автору");
             System.out.println("0. Вернуться в предыдущее меню");
 
-            //System.out.println("Сделайте, пожалуйста, выбор");
             int choice = scanner.nextInt();
             scanner.nextLine();
 
             if (choice == 0) break;
-            // TODO showSubAuthorizationMenu()
             showSubCatalogBookMenu(choice);
         }
     }
@@ -78,17 +77,17 @@ public class Menu {
 
         switch (choice) {
             case 1:
+                // TODO поправить toString
                 System.out.println("Реализация - Список всех книг");
                 service.getAllBooks();
                 waitRead();
                 break;
             case 2:
-                System.out.println("Поиск книги по названию");
+                // TODO Реализация - Поиск книги по автору   --  Вернуть массив или 1 книгу!!!
+                System.out.println("---Поиск книги по названию---");
                 System.out.println("Введите название книги:");
 
-                //System.out.println("Сделайте, пожалуйста, выбор");
                 String input = scanner.nextLine();
-
                 Book result = service.getByTitle(input);
 
                 if (result == null) {
@@ -99,19 +98,20 @@ public class Menu {
                 waitRead();
                 break;
             case 3:
-                // TODO Реализация - Поиск книги по автору
-                /*
-                String input = scanner.nextLine();
-                MyList<Book> result = service.getByAuthor(input);
+                System.out.println("---Поиск книги по автору---");
+                System.out.println("Введите автора книги:");
 
-                if (result == null) {
-                    System.out.println("Книга не найдена!");
-                } else {
-                    System.out.println(result.toString());
+                String strAuthor = scanner.nextLine();
+                MyList<Book> listByAuthor = service.getByAuthor(strAuthor);
+
+                if (listByAuthor == null) System.out.println("Книга не найдена!");
+
+                for (Book book: listByAuthor) {
+                    System.out.println(book);
                 }
                 waitRead();
-                */
                 break;
+
             default:
                 System.out.println("Сделайте корректный выбор!");
                 waitRead();
@@ -127,12 +127,10 @@ public class Menu {
             System.out.println("3. Выйти из системы (Logout)");
             System.out.println("0. Вернуться в предыдущее меню");
 
-            //System.out.println("Сделайте, пожалуйста, выбор");
             int choice = scanner.nextInt();
             scanner.nextLine();
 
             if (choice == 0) break;
-            // TODO showSubAuthorizationMenu()
             showSubAuthorizationMenu(choice);
         }
     }
@@ -140,16 +138,115 @@ public class Menu {
     private void showSubAuthorizationMenu(int choice) {
         switch (choice) {
             case 1:
-                // TODO Реализация входа в систему - Login
-                System.out.println("Реализация входа в систему - Login");
+                // Login
+                System.out.println("\n-------------------------------");
+
+                if (service.getActiveUser() != null) {
+                    System.out.println("Вы уже авторизованы!");
+                    waitRead();
+                    break;
+                }
+                System.out.println("Введите email : ");
+                String logEmail = scanner.nextLine();
+
+                System.out.println("Введите пароль : ");
+                String logPassword = scanner.nextLine();
+
+                if (!service.loginUser(logEmail, logPassword)) {
+                    System.out.println("Некорректные данные! Не удалось войти в систему");
+                    waitRead();
+                    break;
+                }
+                Role role = service.getActiveUser().getRole();
+
+                System.out.printf("Вы авторизованы. %s: %s",
+                        (role == Role.READER) ? "Читатель" : "Библиотекарь",
+                        service.getActiveUser().getName());
+
+                if (role == Role.READER) showReaderMenu();
+                if (role == Role.ADMIN)  showLibrarianMenu();
+                //waitRead();
+                break;
+
+            case 2:
+                // Регистрация
+                System.out.println("\n-------------------------------");
+                System.out.println("Регистрация нового читателя");
+                System.out.println("Введите имя и фамилию:");
+                String name = scanner.nextLine();
+
+                System.out.println("Введите email:");
+                String email = scanner.nextLine();
+
+                System.out.println("Введите пароль:");
+                String password = scanner.nextLine();
+
+                User user = service.registerUser(name, email, password);
+
+                if (user == null) {
+                    System.out.println("Регистрация не выполнена!");
+                } else {
+                    System.out.println("Вы успешно зарегистрировались в системе!");
+                    // System.out.println(user.getEmail() + " ваш email");
+                }
+                waitRead();
+                break;
+
+            case 3:
+                // Logout
+                if (service.getActiveUser() == null) {
+                    System.out.println("Сейчас в системе нет авторизованных пользователей");
+                    waitRead();
+                    break;
+                }
+                service.logout();
+                System.out.println("Вы вышли из системы");
+                waitRead();
+                break;
+            default:
+                System.out.println("Сделайте корректный выбор!");
+                waitRead();
+        }
+    }
+
+    private void showReaderMenu() {
+        while (true) {
+            System.out.println("\n-------------------------------");
+            System.out.println("Меню читателя");
+            System.out.println("1. Мои книги");
+            System.out.println("2. Взять книгу");
+            System.out.println("3. Вернуть книгу");
+            System.out.println("4. Каталог книг");
+            System.out.println("0. Вернуться в предыдущее меню");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            if (choice == 0) break;
+            showSubReaderMenu(choice);
+        }
+    }
+
+    private void  showSubReaderMenu(int choice) {
+        switch (choice) {
+            case 1:
+                // TODO Реализация - Мои книги
+                System.out.println("Реализация - Мои книги");
+                waitRead();
                 break;
             case 2:
-                // TODO Реализация регистрации нового читателя
-                System.out.println("Реализация регистрации нового читателя");
+                // TODO Реализация -  Взять книгу
+                System.out.println("Реализация - Взять книгу");
+                waitRead();
                 break;
             case 3:
-                // TODO Реализация выхода из системы
-                System.out.println("Реализация выхода из системы");
+                // TODO Реализация -  Вернуть книгу
+                System.out.println("Реализация - Вернуть книгу");
+                waitRead();
+                break;
+            case 4:
+                //Каталог книг
+                showCatalogBookMenu();
                 break;
             default:
                 System.out.println("Сделайте корректный выбор!");
@@ -165,17 +262,16 @@ public class Menu {
             System.out.println("1. Добавление книги");
             System.out.println("2. Список всех свободных книг");
             System.out.println("3. Список книг, которые сейчас у читателей");
-            //System.out.println("4. Редактирование информации о книге");  // добавить поле "Заметки" в книгу!
-            //System.out.println("5. Посмотреть у кого находится книга");
+            System.out.println("4. Каталог книг");
+            // System.out.println("4. Редактирование информации о книге");// добавить поле "Заметки" в книгу!
+            // System.out.println("5. Посмотреть у кого находится книга");
             // System.out.println("6. Удаление книги");
             System.out.println("0. Вернуться в предыдущее меню");
 
-            //System.out.println("Сделайте, пожалуйста, выбор");
             int choice = scanner.nextInt();
             scanner.nextLine();
 
             if (choice == 0) break;
-            // TODO подменю библиотекаря со switch choiceLibrarianMenu
             choiceSubLibrarianMenu(choice);
         }
     }
@@ -186,14 +282,21 @@ public class Menu {
             case 1:
                 // TODO Реализация - Добавление книги
                 System.out.println("Реализация - Добавление книги");
+                waitRead();
                 break;
             case 2:
                 // TODO Реализация -  Список всех свободных книг
                 System.out.println("Реализация - Список всех свободных книг");
+                waitRead();
                 break;
             case 3:
                 // TODO Реализация - Список всех книг, находящихся сейчас у читателей
                 System.out.println("Список всех книг, находящихся сейчас у читателей");
+                waitRead();
+                break;
+            case 4:
+                //Каталог книг
+                showCatalogBookMenu();
                 break;
             default:
                 System.out.println("Сделайте корректный выбор!");

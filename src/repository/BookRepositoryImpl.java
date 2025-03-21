@@ -4,8 +4,6 @@ import model.Book;
 import utils.MyArrayList;
 import utils.MyList;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class BookRepositoryImpl implements BookRepository {
@@ -25,6 +23,7 @@ public class BookRepositoryImpl implements BookRepository {
 
         books.addAll(
                 new Book(currentId.getAndIncrement(), "Колобок", "Народная сказка", "ОАО Солнце", 1990),
+                new Book(currentId.getAndIncrement(), "Колобок", "Народная сказка", "ОАО Ранок", 1991),
                 new Book(currentId.getAndIncrement(), "Граф Монте-Кристо", "А. Дюма", "ОАО Первоцвет", 1997),
                 new Book(currentId.getAndIncrement(), "Анна Каренина", "Л. Толстой", "ОАО Первоцвет", 1985)
         );
@@ -57,8 +56,8 @@ public class BookRepositoryImpl implements BookRepository {
 
 
     @Override
-    public List<Book> getByAuthor(String author) {
-        List<Book> result = new ArrayList<>();
+    public MyList<Book> getByAuthor(String author) {
+        MyList<Book> result = new MyArrayList<>();
 
         for (Book book : books) {
 
