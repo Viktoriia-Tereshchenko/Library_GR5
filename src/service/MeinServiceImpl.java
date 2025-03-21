@@ -6,8 +6,9 @@ import repository.BookRepository;
 import repository.UserRepository;
 import utils.MyArrayList;
 import utils.MyList;
+import utils.UserValidation;
 
-import java.util.List;
+import java.util.Objects;
 
 public class MeinServiceImpl implements MeinService {
 
@@ -23,18 +24,50 @@ public class MeinServiceImpl implements MeinService {
     }
 
     @Override
-    public User registerUser(String email, String password) {
-        return null;
+    public User registerUser(String name, String email, String password) {
+
+        if (name == null || name.isEmpty()) {
+            System.out.println("Укажите имя и фамилию!");
+            return null;
+        }
+
+        if (!UserValidation.isEmailValid(email)) {
+            System.out.println("Email не прошел проверку!");
+            return null;
+        }
+
+        if (!UserValidation.isPasswordValid(password)) {
+            System.out.println("Пароль не прошел проверку!");
+            return null;
+        }
+
+        if (userRepository.isEmailExist(email)) {
+            System.out.println("Пользователь с таким email уже существует!");
+            return null;
+        }
+
+        User user = userRepository.addUser(name, email, password);
+        return user;
     }
 
     @Override
     public boolean loginUser(String email, String password) {
+
+        //if (!UserValidation.isEmailValid(email)) return false;
+        //if (!UserValidation.isPasswordValid(password)) return false;
+
+        User user = userRepository.getUserByEmail(email);
+        if (user == null) return false;
+        if (Objects.equals(user.getPassword(),password)) {
+            activeUser = user;
+            return true;
+        }
         return false;
     }
 
     @Override
     public void logout() {
-
+        activeUser = null;
     }
 
     @Override
@@ -62,13 +95,12 @@ public class MeinServiceImpl implements MeinService {
 
         MyList<Book> books = bookRepository.getAllBooks();
 
-        if (books == null || books.size() == 0) {
+        if (books == null || books.isEmpty()) {
             System.out.println("В библиотеке нет книг!");
             return;
         }
         for (int i = 0; i < books.size(); i++) {
-            Book currentBook = books.get(i);
-            System.out.println(currentBook.toString());
+            System.out.println(books.get(i));
         }
 
     }
@@ -84,7 +116,7 @@ public class MeinServiceImpl implements MeinService {
 
 
     @Override
-    public List<Book> getByAuthor(String author) {
+    public MyList<Book> getByAuthor(String author) {
         if (author == null || author.length() == 0){
             return null;
         }
@@ -111,5 +143,9 @@ public class MeinServiceImpl implements MeinService {
         return null;
     }
 
+    @Override
+    public User getActiveUser() {
+        return activeUser;
+    }
 }
 
