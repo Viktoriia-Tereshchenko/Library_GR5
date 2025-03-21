@@ -7,6 +7,8 @@ import repository.UserRepository;
 import utils.MyArrayList;
 import utils.MyList;
 
+import java.util.List;
+
 public class MeinServiceImpl implements MeinService {
 
     private final BookRepository bookRepository;
@@ -80,8 +82,9 @@ public class MeinServiceImpl implements MeinService {
 
 
     @Override
-    public Book getByAuthor(String author) {
-        return null;
+    public List<Book> getByAuthor(String author) {
+
+        return bookRepository.getByAuthor(author);
     }
 
     @Override

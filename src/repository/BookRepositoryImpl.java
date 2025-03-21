@@ -4,6 +4,8 @@ import model.Book;
 import utils.MyArrayList;
 import utils.MyList;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class BookRepositoryImpl implements BookRepository {
@@ -53,10 +55,20 @@ public class BookRepositoryImpl implements BookRepository {
         return null;
     }
 
-        @Override
-        public Book getByAuthor (String author){
-            return null;
+
+    @Override
+    public List<Book> getByAuthor(String author) {
+        List<Book> result = new ArrayList<>();
+
+        for (Book book : books) {
+
+            if (book.getAuthor().toLowerCase().contains(author.toLowerCase())) {
+                result.add(book);
+            }
         }
+        return result;
+    }
+
 
         @Override
         public MyList<Book> getAllFreeBooks () {
