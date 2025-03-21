@@ -1,5 +1,6 @@
 package repository;
 
+import model.Book;
 import model.Role;
 import model.User;
 import utils.MyArrayList;
@@ -41,6 +42,11 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User getUserByEmail(String email) {
+        return null;
+    }
+
+    @Override
+    public MyList<Book> getAllUserBooks(int id) {
         return null;
     }
 
