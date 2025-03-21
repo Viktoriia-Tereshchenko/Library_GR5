@@ -3,6 +3,8 @@ package repository;
 import model.Book;
 import utils.MyList;
 
+import java.util.List;
+
 public interface BookRepository {
 
     // create
@@ -21,7 +23,7 @@ public interface BookRepository {
     Book getByTitle(String title);
 
     //  автору (полное имя или часть имени)
-    Book getByAuthor(String author);
+    List<Book> getByAuthor(String author);
 
     //Список всех свободных книг
     MyList<Book> getAllFreeBooks();

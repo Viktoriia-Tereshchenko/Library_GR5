@@ -4,6 +4,8 @@ import model.Book;
 import model.User;
 import utils.MyList;
 
+import java.util.List;
+
 public interface MeinService {
 
 
@@ -14,7 +16,7 @@ public interface MeinService {
     Book getByTitle(String title);
 
     //  автору (полное имя или часть имени)
-    Book getByAuthor(String author);
+    List<Book> getByAuthor(String author);
 
     // Список книг, которые сейчас у пользователя - репозиторий ?
     MyList<Book> getUserBooks(int id);
