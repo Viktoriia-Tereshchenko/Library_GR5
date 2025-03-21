@@ -10,7 +10,7 @@ public interface MeinService {
 
 
     //Список всех книг
-    void getAllBooks(MyList<Book> books);
+    void getAllBooks();
 
     // Поиск книги по названию (полному или части названия)
     Book getByTitle(String title);

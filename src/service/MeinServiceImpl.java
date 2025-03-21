@@ -58,7 +58,9 @@ public class MeinServiceImpl implements MeinService {
     }
 
     @Override
-    public void getAllBooks(MyList<Book> books) {
+    public void getAllBooks() {
+
+        MyList<Book> books = bookRepository.getAllBooks();
 
         if (books == null || books.size() == 0) {
             System.out.println("В библиотеке нет книг!");
@@ -68,6 +70,7 @@ public class MeinServiceImpl implements MeinService {
             Book currentBook = books.get(i);
             System.out.println(currentBook.toString());
         }
+
     }
 
     @Override
@@ -82,7 +85,9 @@ public class MeinServiceImpl implements MeinService {
 
     @Override
     public List<Book> getByAuthor(String author) {
-
+        if (author == null || author.length() == 0){
+            return null;
+        }
         return bookRepository.getByAuthor(author);
     }
 
