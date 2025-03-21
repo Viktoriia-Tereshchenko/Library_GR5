@@ -45,13 +45,14 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public Book getByTitle(String title) {
-        for (Book book : this.books) {
+    public MyList<Book> getByTitle(String title) {
+        MyList<Book> result = new MyArrayList<>();
+        for (Book book : books) {
             if (book.getTitle().toLowerCase().contains(title.toLowerCase())) {
-                return book;
+                result.add(book);
             }
         }
-        return null;
+        return result;
     }
 
 

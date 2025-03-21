@@ -4,7 +4,7 @@ import model.Book;
 import model.Role;
 import model.User;
 import service.MeinService;
-import utils.MyArrayList;
+
 import utils.MyList;
 
 import java.util.Scanner;
@@ -87,14 +87,16 @@ public class Menu {
                 System.out.println("---Поиск книги по названию---");
                 System.out.println("Введите название книги:");
 
-                String input = scanner.nextLine();
-                Book result = service.getByTitle(input);
 
-                if (result == null) {
-                    System.out.println("Книга не найдена!");
-                } else {
-                    System.out.println(result.toString());
-                }
+                String strTitle = scanner.nextLine();
+                MyList<Book> listByTitle = service.getByTitle(strTitle);
+
+                if (listByTitle == null )System.out.println("Книга не найдена!");
+
+                for (Book book : listByTitle) {
+                    System.out.println(book);
+                    }
+
                 waitRead();
                 break;
             case 3:
