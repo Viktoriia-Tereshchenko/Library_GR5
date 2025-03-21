@@ -4,6 +4,7 @@ import model.Book;
 import model.User;
 import repository.BookRepository;
 import repository.UserRepository;
+import utils.MyArrayList;
 import utils.MyList;
 
 public class MeinServiceImpl implements MeinService {
@@ -70,8 +71,13 @@ public class MeinServiceImpl implements MeinService {
 
     @Override
     public Book getByTitle(String title) {
-        return null;
+        if (title == null || title.length() == 0){
+            return null;
+        }
+
+        return bookRepository.getByTitle(title);
     }
+
 
     @Override
     public Book getByAuthor(String author) {
