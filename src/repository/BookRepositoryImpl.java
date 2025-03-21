@@ -35,7 +35,7 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public MyList<Book> getAllBooks() {
-        return null;
+        return books;
     }
 
     @Override

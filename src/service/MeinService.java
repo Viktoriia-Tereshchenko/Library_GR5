@@ -6,6 +6,31 @@ import utils.MyList;
 
 public interface MeinService {
 
+
+    //Список всех книг
+    void getAllBooks(MyList<Book> books);
+
+    // Поиск книги по названию (полному или части названия)
+    Book getByTitle(String title);
+
+    //  автору (полное имя или часть имени)
+    Book getByAuthor(String author);
+
+    // Список книг, которые сейчас у пользователя - репозиторий ?
+    MyList<Book> getUserBooks(int id);
+
+
+    // Список всех занятых книг, находящихся сейчас у читателей
+    MyList<Book> getAllBusyBooks();
+
+
+    // Добавление книги
+    Book addBook (String title,String author, String edition, int year);
+
+    //Список всех свободных книг
+    MyList<Book> getAllFreeBooks();
+
+
     //  Регистрация пользователя
     User registerUser(String email, String password);
 
