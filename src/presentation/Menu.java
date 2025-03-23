@@ -77,40 +77,28 @@ public class Menu {
 
         switch (choice) {
             case 1:
-                // TODO поправить toString
-                System.out.println("Реализация - Список всех книг");
-                service.getAllBooks();
+                System.out.println("-------Список всех книг-------");
+                MyList<Book> listAllBooks = service.getAllBooks();
+                showBooksList(listAllBooks);
                 waitRead();
                 break;
             case 2:
-                // TODO Реализация - Поиск книги по автору   --  Вернуть массив или 1 книгу!!!
                 System.out.println("---Поиск книги по названию---");
                 System.out.println("Введите название книги:");
 
-
                 String strTitle = scanner.nextLine();
                 MyList<Book> listByTitle = service.getByTitle(strTitle);
-
-                if (listByTitle == null )System.out.println("Книга не найдена!");
-
-                for (Book book : listByTitle) {
-                    System.out.println(book);
-                    }
-
+                showBooksList(listByTitle);
                 waitRead();
                 break;
+
             case 3:
-                System.out.println("---Поиск книги по автору---");
+                System.out.println("----Поиск книги по автору----");
                 System.out.println("Введите автора книги:");
 
                 String strAuthor = scanner.nextLine();
                 MyList<Book> listByAuthor = service.getByAuthor(strAuthor);
-
-                if (listByAuthor == null) System.out.println("Книга не найдена!");
-
-                for (Book book: listByAuthor) {
-                    System.out.println(book);
-                }
+                showBooksList(listByAuthor);
                 waitRead();
                 break;
 
@@ -166,7 +154,7 @@ public class Menu {
                         service.getActiveUser().getName());
 
                 if (role == Role.READER) showReaderMenu();
-                if (role == Role.ADMIN)  showLibrarianMenu();
+                if (role == Role.ADMIN) showLibrarianMenu();
                 //waitRead();
                 break;
 
@@ -174,7 +162,7 @@ public class Menu {
                 // Регистрация
                 System.out.println("\n-------------------------------");
                 System.out.println("Регистрация нового читателя");
-                System.out.println("Введите имя и фамилию:");
+                System.out.println("Введите имя:");
                 String name = scanner.nextLine();
 
                 System.out.println("Введите email:");
@@ -189,7 +177,6 @@ public class Menu {
                     System.out.println("Регистрация не выполнена!");
                 } else {
                     System.out.println("Вы успешно зарегистрировались в системе!");
-                    // System.out.println(user.getEmail() + " ваш email");
                 }
                 waitRead();
                 break;
@@ -197,7 +184,7 @@ public class Menu {
             case 3:
                 // Logout
                 if (service.getActiveUser() == null) {
-                    System.out.println("Сейчас в системе нет авторизованных пользователей");
+                    System.out.println("Сейчас в системе нет авторизованных пользователей!");
                     waitRead();
                     break;
                 }
@@ -205,6 +192,7 @@ public class Menu {
                 System.out.println("Вы вышли из системы");
                 waitRead();
                 break;
+
             default:
                 System.out.println("Сделайте корректный выбор!");
                 waitRead();
@@ -229,7 +217,7 @@ public class Menu {
         }
     }
 
-    private void  showSubReaderMenu(int choice) {
+    private void showSubReaderMenu(int choice) {
         switch (choice) {
             case 1:
                 // TODO Реализация - Мои книги
@@ -256,7 +244,6 @@ public class Menu {
         }
     }
 
-
     private void showLibrarianMenu() {
         while (true) {
             System.out.println("\n-------------------------------");
@@ -265,7 +252,7 @@ public class Menu {
             System.out.println("2. Список всех свободных книг");
             System.out.println("3. Список книг, которые сейчас у читателей");
             System.out.println("4. Каталог книг");
-            // System.out.println("4. Редактирование информации о книге");// добавить поле "Заметки" в книгу!
+            // System.out.println("4. Редактирование информации о книге"); // добавить поле "Заметки" в книгу!
             // System.out.println("5. Посмотреть у кого находится книга");
             // System.out.println("6. Удаление книги");
             System.out.println("0. Вернуться в предыдущее меню");
@@ -311,4 +298,17 @@ public class Menu {
         scanner.nextLine();
     }
 
+    // вызываем каждый раз при выводе наших списков
+    private void showBooksList(MyList<Book> books) {
+
+        if (books == null || books.isEmpty()) {
+            System.out.println("Книги не найдены!");
+            return;
+        }
+        for (Book book : books) {
+            //System.out.println(book);
+            System.out.printf("№ %d - \"%s\" / %s / %s / %d\n",
+                    book.getId(), book.getTitle(), book.getAuthor(), book.getEdition(), book.getYear());
+        }
+    }
 }
