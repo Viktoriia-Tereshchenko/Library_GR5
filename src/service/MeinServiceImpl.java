@@ -128,7 +128,7 @@ public class MeinServiceImpl implements MeinService {
         return null;
     }
 
-    // TODO
+
     @Override
     public MyList<Book> getAllBusyBooks() {
         MyList<Book> busyBooks = new MyArrayList<>();
@@ -146,7 +146,7 @@ public class MeinServiceImpl implements MeinService {
         return null;
     }
 
-    // TODO
+
     @Override
     public MyList<Book> getAllFreeBooks() {
         MyList<Book> freeBooks = new MyArrayList<>();

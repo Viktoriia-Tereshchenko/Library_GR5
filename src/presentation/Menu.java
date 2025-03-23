@@ -273,16 +273,19 @@ public class Menu {
                 System.out.println("Реализация - Добавление книги");
                 waitRead();
                 break;
+
             case 2:
-                // TODO Реализация -  Список всех свободных книг
-                System.out.println("Реализация - Список всех свободных книг");
+                System.out.println("------Все свободные книги------");
+                showBooksList(service.getAllFreeBooks());
                 waitRead();
                 break;
+
             case 3:
-                // TODO Реализация - Список всех книг, находящихся сейчас у читателей
-                System.out.println("Список всех книг, находящихся сейчас у читателей");
+                System.out.println("--Книги, находящиеся у читателей--");
+                showBooksList(service.getAllBusyBooks());
                 waitRead();
                 break;
+
             case 4:
                 //Каталог книг
                 showCatalogBookMenu();
