@@ -4,6 +4,7 @@ import model.Book;
 import model.User;
 import repository.BookRepository;
 import repository.UserRepository;
+import utils.MyArrayList;
 import utils.MyList;
 import utils.UserValidation;
 
@@ -130,8 +131,15 @@ public class MeinServiceImpl implements MeinService {
     // TODO
     @Override
     public MyList<Book> getAllBusyBooks() {
-        return null;
+        MyList<Book> busyBooks = new MyArrayList<>();
+        for (Book book : bookRepository.getAllBooks()) {
+            if (book.isBusy()) {
+                busyBooks.add(book);
+            }
+        }
+        return busyBooks;   // Возвращаем список занятых книг
     }
+
 
     @Override
     public Book addBook(String title, String author, String edition, int year) {
