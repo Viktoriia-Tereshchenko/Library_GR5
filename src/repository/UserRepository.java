@@ -17,7 +17,6 @@ public interface UserRepository {
     // Cписок всех книг, находящихся сейчас у конкретного читателя
     MyList<Book> getAllUserBooks(int id);
 
-
     // update
     boolean updatePassword(String name, String email, String newPassword);
     //boolean updatePassword(int id, String newPassword);

@@ -90,6 +90,4 @@ public class UserValidation {
         }
         return isDigit && isLowerCase && isUpperCase && isSpecialSymbol;
     }
-
-
 }
