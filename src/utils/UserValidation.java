@@ -90,4 +90,15 @@ public class UserValidation {
         }
         return isDigit && isLowerCase && isUpperCase && isSpecialSymbol;
     }
+
+
+    public static boolean isNameValid(String name) {
+
+        if (name == null || name.isEmpty() || name.length() < 3) return false;
+        // в имени только символы!
+        for (char ch : name.toCharArray()) {
+            if (!Character.isAlphabetic(ch)) return false;
+        }
+        return true;
+    }
 }

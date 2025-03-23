@@ -9,7 +9,7 @@ public class Book {
     private String author;
     private String edition; // издание
     private int year;
-    private boolean isInHand; // true - книга выдана, по-умолчанию false
+    private boolean isBusy; // true - книга выдана, по-умолчанию false
 
     public Book(int id, String title, String author, String edition, int year) {
         this.id = id;
@@ -22,19 +22,19 @@ public class Book {
     // TODO переделать Stringformat
     @Override
     public String toString() {
-        return  String.format("Книга: Номер - %d Название - %s Автор - %s Издание - %s Год издания - %d В наличии - %s", id, title, author, edition, year, !isInHand);
+        return  String.format("Книга: Номер - %d Название - %s Автор - %s Издание - %s Год издания - %d В наличии - %s", id, title, author, edition, year, !isBusy);
     }
 
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Book)) return false;
         Book book = (Book) o;
-        return id == book.id && year == book.year && isInHand == book.isInHand && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(edition, book.edition);
+        return id == book.id && year == book.year && isBusy == book.isBusy && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(edition, book.edition);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, edition, year, isInHand);
+        return Objects.hash(id, title, author, edition, year, isBusy);
     }
 
     public int getId() {
@@ -57,8 +57,8 @@ public class Book {
         return year;
     }
 
-    public boolean isInHand() {
-        return isInHand;
+    public boolean isBusy() {
+        return isBusy;
     }
 
     public void setTitle(String title) {
@@ -77,7 +77,7 @@ public class Book {
         this.year = year;
     }
 
-    public void setInHand(boolean inHand) {
-        isInHand = inHand;
+    public void setBusy(boolean busy) {
+        isBusy = busy;
     }
 }

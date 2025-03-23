@@ -162,7 +162,7 @@ public class Menu {
                 // Регистрация
                 System.out.println("\n-------------------------------");
                 System.out.println("Регистрация нового читателя");
-                System.out.println("Введите имя и фамилию:");
+                System.out.println("Введите имя:");
                 String name = scanner.nextLine();
 
                 System.out.println("Введите email:");

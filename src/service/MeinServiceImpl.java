@@ -25,8 +25,8 @@ public class MeinServiceImpl implements MeinService {
     @Override
     public User registerUser(String name, String email, String password) {
 
-        if (name == null || name.isEmpty()) {
-            System.out.println("Укажите имя и фамилию!");
+        if (!UserValidation.isNameValid(name)) {
+            System.out.println("Некорректное имя!");
             return null;
         }
 
@@ -98,7 +98,6 @@ public class MeinServiceImpl implements MeinService {
 
         MyList<Book> books = bookRepository.getAllBooks();
         if (books == null || books.isEmpty()) {
-            System.out.println("В библиотеке нет книг!");
             return null;
         }
         return bookRepository.getAllBooks();
