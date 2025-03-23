@@ -22,7 +22,7 @@ public class Book {
     // TODO переделать Stringformat
     @Override
     public String toString() {
-        return  String.format("Книга: Номер - %d Название - %s Автор - %s Издание - %s Год издания - %d В наличии - %s", id, title, author, edition, year, !isBusy);
+        return  String.format("Книга: №%d - '%s' / %s / %s / %d", id, title, author, edition, year);
     }
 
     @Override
