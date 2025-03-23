@@ -149,12 +149,18 @@ public class MeinServiceImpl implements MeinService {
     // TODO
     @Override
     public MyList<Book> getAllFreeBooks() {
-        return null;
+        MyList<Book> freeBooks = new MyArrayList<>();
+        for (Book book : bookRepository.getAllBooks()) {
+            if (!book.isBusy()) {
+                freeBooks.add(book);
+            }
+        }
+        return freeBooks;
     }
+
 
     @Override
     public User getActiveUser() {
         return activeUser;
     }
 }
-
