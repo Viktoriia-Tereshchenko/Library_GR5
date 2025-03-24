@@ -24,7 +24,9 @@ public class Menu {
 
     private void showMenu() {
         while (true) {
-            System.out.println("\nДобро пожаловать в меню библиотеки \"Знания Века\"\n");
+            System.out.println("--------------------------------------------------");
+            System.out.println("Добро пожаловать в меню библиотеки \"Знания Века\"");
+            System.out.println("--------------------------------------------------");
             System.out.println("1. Каталог книг");
             System.out.println("2. Авторизация / Регистрация");
             System.out.println("0. Выход");
@@ -129,8 +131,7 @@ public class Menu {
         switch (choice) {
             case 1:
                 // Login
-                System.out.println("\n-------------------------------");
-
+                System.out.println("\n--------Вход в систему---------");
                 if (service.getActiveUser() != null) {
                     System.out.println("Вы уже авторизованы!");
                     waitRead();
@@ -162,6 +163,12 @@ public class Menu {
                 // Регистрация
                 System.out.println("\n-------------------------------");
                 System.out.println("Регистрация нового читателя");
+                if (service.getActiveUser() != null) {
+                    System.out.println("Вы уже авторизованы! Сначала выйдите из системы!");
+                    waitRead();
+                    break;
+                }
+
                 System.out.println("Введите имя:");
                 String name = scanner.nextLine();
 
@@ -232,10 +239,12 @@ public class Menu {
                 scanner.nextLine();
 
                 if (service.takeBook(input, service.getActiveUser().getUserId())) {
-                    System.out.println("Вам выдана книга № " + input);
+                    //System.out.println("Вам выдана книга № " + input);
+                    System.out.printf("Вам выдана книга № %d (%s / %s)\n", input,
+                            service.getBookById(input).getTitle(), service.getBookById(input).getAuthor());
                 } else {
                     System.out.println("Невозможно выдать книгу № " + input);
-                };
+                }
                 waitRead();
                 break;
 
@@ -250,7 +259,8 @@ public class Menu {
                     System.out.println("Вы вернули книгу № " + inputId);
                 } else {
                     System.out.println("Невозможно вернуть книгу № " + inputId);
-                };
+                }
+                ;
                 waitRead();
                 break;
 
@@ -272,8 +282,8 @@ public class Menu {
             System.out.println("2. Список всех свободных книг");
             System.out.println("3. Список книг, которые сейчас у читателей");
             System.out.println("4. Каталог книг");
+            System.out.println("5. Посмотреть, у кого находится книга");
             // System.out.println("4. Редактирование информации о книге"); // добавить поле "Заметки" в книгу!
-            // System.out.println("5. Посмотреть у кого находится книга");
             // System.out.println("6. Удаление книги");
             System.out.println("0. Вернуться в предыдущее меню");
 
@@ -297,7 +307,7 @@ public class Menu {
                 String author = scanner.nextLine();
 
                 System.out.println("Введите издание:");
-                String edition= scanner.nextLine();
+                String edition = scanner.nextLine();
 
                 System.out.println("Введите год:");
                 int year = scanner.nextInt();
@@ -329,6 +339,21 @@ public class Menu {
                 //Каталог книг
                 showCatalogBookMenu();
                 break;
+
+            case 5:
+                System.out.println("----Поиск читателя по № книгу----");
+
+                System.out.println("Укажите № книги:");
+                int id = scanner.nextInt();
+                scanner.nextLine();
+
+                User userTakeBook = service.getUserWhoTakeBook(id);
+                if (userTakeBook != null)
+                    System.out.printf("Книга выдана читателю: имя - %s | email - %s\n",
+                            userTakeBook.getName(), userTakeBook.getEmail());
+                waitRead();
+                break;
+
             default:
                 System.out.println("Сделайте корректный выбор!");
                 waitRead();

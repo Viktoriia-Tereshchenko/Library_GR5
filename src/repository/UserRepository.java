@@ -25,4 +25,6 @@ public interface UserRepository {
     boolean deleteUser(int id);
 
     User getById(int userId);
+
+    MyList<User> getAllUsers();
 }

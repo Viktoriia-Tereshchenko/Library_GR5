@@ -134,7 +134,29 @@ public class MeinServiceImpl implements MeinService {
     }
 
     @Override
-    public User getUserWhoTakeBook(int Id) {
+    public User getUserWhoTakeBook(int id) {
+
+        if (id < 1000) {
+            System.out.println("Некорректный номер книги!");
+            return null;
+        }
+
+        if (bookRepository.getById(id) == null) {
+            System.out.println("Книги с таким номером нет в библиотеке!");
+            return null;
+        }
+
+         if (!bookRepository.getById(id).isBusy()) {
+             System.out.println("Книга в библиотеке!");
+             return null;
+         }
+
+         for (User user : userRepository.getAllUsers()) {
+             for (Book book : user.getUserBooks()) {
+                 if (book.getId() == id) return user;
+             }
+         }
+        System.out.println("Читатель не найден!");
         return null;
     }
 
@@ -203,5 +225,11 @@ public class MeinServiceImpl implements MeinService {
     @Override
     public User getActiveUser() {
         return activeUser;
+    }
+
+    @Override
+    public Book getBookById(int id) {
+        if (id < 1) return null;
+        return bookRepository.getById(id);
     }
 }
