@@ -205,7 +205,18 @@ public class MeinServiceImpl implements MeinService {
     public Book addBook(String title, String author, String edition, int year) {
 
        // проверка строк
-        if (title == null || author == null || edition == null || year > 1900) return null;
+        if (title == null || title.trim().isEmpty()) {
+            System.out.println("Ошибка. Введите название книги");
+        }
+        if (author == null || author.trim().isEmpty()){
+            System.out.println("Ошибка. Введите имя автора");
+        }
+        if (edition == null || edition.trim().isEmpty()) {
+            System.out.println("Ошибка. Введите название издания");
+        }
+        if (year <= 1450 || year > java.time.Year.now().getValue()) {
+            System.out.println("Ошибка. Некорректный год выпуска");
+        }
 
         return bookRepository.addBook(title, author, edition, year);
     }
