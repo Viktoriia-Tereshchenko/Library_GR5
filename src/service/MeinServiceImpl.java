@@ -90,10 +90,33 @@ public class MeinServiceImpl implements MeinService {
         user.getUserBooks().add(book);
         return true;
     }
-    // TODO
+
+
     @Override
-    public boolean returnBook(int id) {
-        return false;
+    public boolean returnBook(int bookId, int userId) {
+        Book book = bookRepository.getById(bookId);
+        User user = userRepository.getById(userId);
+
+        if (!book.isBusy()) {
+            System.out.println("Книга в библиотеке ");
+            return false;
+        }
+
+        int index = -1;
+        MyList<Book> usersBook = user.getUserBooks();
+        for (int i = 0; i < user.getUserBooks().size(); i++) {
+            if (usersBook.get(i).getId() == bookId) {
+                index = i;
+            }
+
+        }
+        if (index == -1) {
+            System.out.println("У пользователя нет данной книги ");
+            return false;
+        }
+        usersBook.remove(index);
+        book.setBusy(false);
+        return true;
     }
 
     @Override
