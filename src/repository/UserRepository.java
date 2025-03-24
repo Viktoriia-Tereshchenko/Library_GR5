@@ -24,4 +24,5 @@ public interface UserRepository {
     // delete
     boolean deleteUser(int id);
 
+    User getById(int userId);
 }

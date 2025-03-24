@@ -58,6 +58,7 @@ public class UserRepositoryImpl implements UserRepository {
         return null;
     }
 
+
     // TODO
     @Override
     public MyList<Book> getAllUserBooks(int id) {
@@ -74,5 +75,15 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public boolean deleteUser(int id) {
         return false;
+    }
+
+    @Override
+    public User getById(int userId) {
+        for (User user : users) {
+            if (user.getUserId() == userId) {
+                return user;
+            }
+        }
+        return null;
     }
 }

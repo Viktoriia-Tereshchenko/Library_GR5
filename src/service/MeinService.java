@@ -39,7 +39,7 @@ public interface MeinService {
     void logout();
 
     //Взятие книги из библиотеки
-    boolean takeBook(int id);
+    boolean takeBook(int bookId, int userId);
 
     //Возврат книги в библиотеку
     boolean returnBook(int id);
