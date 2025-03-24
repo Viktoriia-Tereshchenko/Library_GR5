@@ -58,11 +58,9 @@ public class UserRepositoryImpl implements UserRepository {
         return null;
     }
 
-
-    // TODO
     @Override
     public MyList<Book> getAllUserBooks(int id) {
-        return null;
+        return getById(id).getUserBooks();
     }
 
     // TODO
