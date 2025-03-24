@@ -149,7 +149,7 @@ public class Menu {
                 }
                 Role role = service.getActiveUser().getRole();
 
-                System.out.printf("Вы авторизованы. %s: %s",
+                System.out.printf("\nBы авторизованы. %s: %s",
                         (role == Role.READER) ? "Читатель" : "Библиотекарь",
                         service.getActiveUser().getName());
 
@@ -231,7 +231,7 @@ public class Menu {
                 int input = scanner.nextInt();
                 scanner.nextLine();
 
-                if (service.takeBook(input)) {
+                if (service.takeBook(input, service.getActiveUser().getUserId())) {
                     System.out.println("Вам выдана книга № " + input);
                 } else {
                     System.out.println("Невозможно выдать книгу № " + input);

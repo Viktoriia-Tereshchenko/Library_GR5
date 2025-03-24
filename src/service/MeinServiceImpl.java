@@ -80,7 +80,10 @@ public class MeinServiceImpl implements MeinService {
         if (book == null || user == null) {
             return false;
         }
-        if (book.isBusy()) return false;
+        if (book.isBusy()) {
+            System.out.println("Книга уже выдана!");
+            return false;
+        }
 
         book.setBusy(true);
 
