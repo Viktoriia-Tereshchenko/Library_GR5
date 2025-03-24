@@ -74,13 +74,11 @@ public class BookRepositoryImpl implements BookRepository {
         return result;
     }
 
-    // TODO
     @Override
     public MyList<Book> getAllFreeBooks() {
         return null;
     }
 
-    // TODO
     @Override
     public MyList<Book> getAllBusyBooks() {
         return null;
