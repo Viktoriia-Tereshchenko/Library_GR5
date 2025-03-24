@@ -119,11 +119,14 @@ public class MeinServiceImpl implements MeinService {
         return true;
     }
 
-
-    // TODO
     @Override
     public MyList<Book> getUserBooks() {
-        return null;
+
+        if (activeUser == null) return null;
+        MyList<Book> listUserBooks = userRepository.getAllUserBooks(activeUser.getUserId());
+        if (listUserBooks == null || listUserBooks.isEmpty()) return null;
+
+        return listUserBooks;
     }
 
     @Override

@@ -220,8 +220,8 @@ public class Menu {
     private void showSubReaderMenu(int choice) {
         switch (choice) {
             case 1:
-                // TODO Реализация - Мои книги
-                System.out.println("Реализация - Мои книги");
+                System.out.println("-----------Мои книги-----------");
+                showBooksList(service.getUserBooks());
                 waitRead();
                 break;
             case 2:
@@ -240,10 +240,20 @@ public class Menu {
                 break;
 
             case 3:
-                // TODO Реализация -  Вернуть книгу
-                System.out.println("Реализация - Вернуть книгу");
+                System.out.println("----------Вернуть книгу----------");
+                System.out.println("Введите номер книги:");
+
+                int inputId = scanner.nextInt();
+                scanner.nextLine();
+
+                if (service.takeBook(inputId, service.getActiveUser().getUserId())) {
+                    System.out.println("Вы вернули книгу № " + inputId);
+                } else {
+                    System.out.println("Невозможно вернуть книгу № " + inputId);
+                };
                 waitRead();
                 break;
+
             case 4:
                 //Каталог книг
                 showCatalogBookMenu();
@@ -281,6 +291,27 @@ public class Menu {
             case 1:
                 // TODO Реализация - Добавление книги
                 System.out.println("Реализация - Добавление книги");
+
+                System.out.println("Введите название книги:");
+                String title = scanner.nextLine();
+
+                System.out.println("Введите автора:");
+                String author = scanner.nextLine();
+
+                System.out.println("Введите издание:");
+                String edition= scanner.nextLine();
+
+                System.out.println("Введите год:");
+                int year = scanner.nextInt();
+                scanner.nextLine();
+
+                Book result = service.addBook(title, author, edition, year);
+
+                if (result == null) {
+                    System.out.println("Книга не добавлена!");
+                } else {
+                    System.out.println("Вы успешно добавили книги!");
+                }
                 waitRead();
                 break;
 

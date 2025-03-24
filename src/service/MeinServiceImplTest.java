@@ -1,5 +1,6 @@
 package service;
 
+import model.Book;
 import model.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,10 +8,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import repository.BookRepository;
 import repository.BookRepositoryImpl;
 import repository.UserRepository;
 import repository.UserRepositoryImpl;
+import utils.MyList;
+
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -109,5 +113,12 @@ class MeinServiceImplTest {
 //        Assertions.assertEquals(4, result.size());
 //    }
 
-
+    // тест public MyList<Book> getUserBooks()
+    @ParameterizedTest
+    @ValueSource(ints = {1 , 2})
+    void testGetUserBooks(int id) {
+        User activeUser = repositoryU.getById(id);
+        MyList<Book> resultBooks= service.getUserBooks();
+        Assertions.assertNull(resultBooks);
+    }
 }
