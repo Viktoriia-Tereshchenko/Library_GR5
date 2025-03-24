@@ -25,10 +25,11 @@ public class BookRepositoryImpl implements BookRepository {
                 new Book(currentId.getAndIncrement(), "Колобок", "Народная сказка", "ОАО Солнце", 1990),
                 new Book(currentId.getAndIncrement(), "Колобок", "Народная сказка", "ОАО Ранок", 1991),
                 new Book(currentId.getAndIncrement(), "Граф Монте-Кристо", "А. Дюма", "ОАО Первоцвет", 1997),
-                new Book(currentId.getAndIncrement(), "Анна Каренина", "Л. Толстой", "ОАО Первоцвет", 1985)
+                new Book(currentId.getAndIncrement(), "Анна Каренина", "Л.Н. Толстой", "ОАО Первоцвет", 1985)
         );
     }
 
+    // TODO
     @Override
     public Book addBook(String title, String author, String edition, int year) {
         return null;
@@ -39,6 +40,7 @@ public class BookRepositoryImpl implements BookRepository {
         return books;
     }
 
+    // TODO
     @Override
     public Book getById(int id) {
         return null;
@@ -69,25 +71,28 @@ public class BookRepositoryImpl implements BookRepository {
         return result;
     }
 
-
-        @Override
-        public MyList<Book> getAllFreeBooks () {
-            return null;
-        }
-
-        @Override
-        public MyList<Book> getAllBusyBooks () {
-            return null;
-        }
-
-        //  Редактирование информации о книге (только ADMIN)
-        @Override
-        public void saveBook (Book book){
-
-        }
-
-        @Override
-        public void deleteById ( int id){
-
-        }
+    // TODO
+    @Override
+    public MyList<Book> getAllFreeBooks() {
+        return null;
     }
+
+    // TODO
+    @Override
+    public MyList<Book> getAllBusyBooks() {
+        return null;
+    }
+
+    // TODO
+    //  Редактирование информации о книге (только ADMIN)
+    @Override
+    public void saveBook(Book book) {
+
+    }
+
+    // TODO
+    @Override
+    public void deleteById(int id) {
+
+    }
+}

@@ -40,6 +40,11 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public boolean isEmailExist(String email) {
+        for (User user : users) {
+            if (Objects.equals(user.getEmail(), email)) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -53,17 +58,19 @@ public class UserRepositoryImpl implements UserRepository {
         return null;
     }
 
+    // TODO
     @Override
     public MyList<Book> getAllUserBooks(int id) {
         return null;
     }
 
+    // TODO
     @Override
     public boolean updatePassword(String name, String email, String newPassword) {
         return false;
     }
 
-
+    // TODO
     @Override
     public boolean deleteUser(int id) {
         return false;

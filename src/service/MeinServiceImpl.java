@@ -26,8 +26,8 @@ public class MeinServiceImpl implements MeinService {
     @Override
     public User registerUser(String name, String email, String password) {
 
-        if (name == null || name.isEmpty()) {
-            System.out.println("Укажите имя и фамилию!");
+        if (!UserValidation.isNameValid(name)) {
+            System.out.println("Некорректное имя!");
             return null;
         }
 
@@ -53,12 +53,13 @@ public class MeinServiceImpl implements MeinService {
     @Override
     public boolean loginUser(String email, String password) {
 
+        // TODO -раскомментировать перед демонстрацией
         //if (!UserValidation.isEmailValid(email)) return false;
         //if (!UserValidation.isPasswordValid(password)) return false;
 
         User user = userRepository.getUserByEmail(email);
         if (user == null) return false;
-        if (Objects.equals(user.getPassword(),password)) {
+        if (Objects.equals(user.getPassword(), password)) {
             activeUser = user;
             return true;
         }
@@ -70,16 +71,19 @@ public class MeinServiceImpl implements MeinService {
         activeUser = null;
     }
 
+    // TODO
     @Override
     public boolean takeBook(int id) {
         return false;
     }
 
+    // TODO
     @Override
     public boolean returnBook(int id) {
         return false;
     }
 
+    // TODO
     @Override
     public MyList<Book> getUserBooks() {
         return null;
@@ -91,23 +95,18 @@ public class MeinServiceImpl implements MeinService {
     }
 
     @Override
-    public void getAllBooks() {
+    public MyList<Book> getAllBooks() {
 
         MyList<Book> books = bookRepository.getAllBooks();
-
         if (books == null || books.isEmpty()) {
-            System.out.println("В библиотеке нет книг!");
-            return;
+            return null;
         }
-        for (int i = 0; i < books.size(); i++) {
-            System.out.println(books.get(i));
-        }
-
+        return bookRepository.getAllBooks();
     }
 
     @Override
     public MyList<Book> getByTitle(String title) {
-        if (title == null || title.length() == 0){
+        if (title == null || title.length() == 0) {
             return null;
         }
 
@@ -117,35 +116,51 @@ public class MeinServiceImpl implements MeinService {
 
     @Override
     public MyList<Book> getByAuthor(String author) {
-        if (author == null || author.length() == 0){
+        if (author == null || author.length() == 0) {
             return null;
         }
         return bookRepository.getByAuthor(author);
     }
 
+    // TODO
     @Override
     public MyList<Book> getUserBooks(int id) {
         return null;
     }
 
+
     @Override
     public MyList<Book> getAllBusyBooks() {
-        return null;
+        MyList<Book> busyBooks = new MyArrayList<>();
+        for (Book book : bookRepository.getAllBooks()) {
+            if (book.isBusy()) {
+                busyBooks.add(book);
+            }
+        }
+        return busyBooks;   // Возвращаем список занятых книг
     }
+
 
     @Override
     public Book addBook(String title, String author, String edition, int year) {
         return null;
     }
 
+
     @Override
     public MyList<Book> getAllFreeBooks() {
-        return null;
+        MyList<Book> freeBooks = new MyArrayList<>();
+        for (Book book : bookRepository.getAllBooks()) {
+            if (!book.isBusy()) {
+                freeBooks.add(book);
+            }
+        }
+        return freeBooks;
     }
+
 
     @Override
     public User getActiveUser() {
         return activeUser;
     }
 }
-
