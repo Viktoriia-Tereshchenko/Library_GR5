@@ -42,7 +42,7 @@ public interface MeinService {
     boolean takeBook(int bookId, int userId);
 
     //Возврат книги в библиотеку
-    boolean returnBook(int id);
+    boolean returnBook(int bookId, int userId);
 
     // Список книг, которые сейчас у пользователя - репозиторий ?
     MyList<Book> getUserBooks();
