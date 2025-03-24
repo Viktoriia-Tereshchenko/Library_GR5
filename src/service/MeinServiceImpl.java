@@ -71,12 +71,22 @@ public class MeinServiceImpl implements MeinService {
         activeUser = null;
     }
 
-    // TODO
-    @Override
-    public boolean takeBook(int id) {
-        return false;
-    }
 
+    @Override
+    public boolean takeBook(int bookId, int userId) {
+        Book book = bookRepository.getById(bookId);
+        User user = userRepository.getById(userId);
+
+        if (book == null || user == null) {
+            return false;
+        }
+        if (book.isBusy()) return false;
+
+        book.setBusy(true);
+
+        user.getUserBooks().add(book);
+        return true;
+    }
     // TODO
     @Override
     public boolean returnBook(int id) {
