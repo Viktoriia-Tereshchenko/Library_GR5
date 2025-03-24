@@ -40,9 +40,12 @@ public class BookRepositoryImpl implements BookRepository {
         return books;
     }
 
-    // TODO
     @Override
     public Book getById(int id) {
+        for (Book book: books) {
+            if (book.getId() == id)
+                return book;
+        }
         return null;
     }
 
@@ -83,16 +86,28 @@ public class BookRepositoryImpl implements BookRepository {
         return null;
     }
 
-    // TODO
-    //  Редактирование информации о книге (только ADMIN)
     @Override
     public void saveBook(Book book) {
+        // изменяемые поля
+        // название
+        getById(book.getId()).setTitle(book.getTitle());
 
+        // автор
+        getById(book.getId()).setAuthor(book.getAuthor());
+
+        // издание
+        getById(book.getId()).setEdition(book.getEdition());
+
+        // год
+        //private int year;
+        getById(book.getId()).setYear(book.getYear());
+
+        // признак, что книга выдана
+        getById(book.getId()).setBusy(book.isBusy());
     }
 
     // TODO
     @Override
     public void deleteById(int id) {
-
     }
 }

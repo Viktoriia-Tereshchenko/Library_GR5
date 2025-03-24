@@ -225,10 +225,20 @@ public class Menu {
                 waitRead();
                 break;
             case 2:
-                // TODO Реализация -  Взять книгу
-                System.out.println("Реализация - Взять книгу");
+                System.out.println("----------Взять книгу----------");
+                System.out.println("Введите номер книги:");
+
+                int input = scanner.nextInt();
+                scanner.nextLine();
+
+                if (service.takeBook(input)) {
+                    System.out.println("Вам выдана книга № " + input);
+                } else {
+                    System.out.println("Невозможно выдать книгу № " + input);
+                };
                 waitRead();
                 break;
+
             case 3:
                 // TODO Реализация -  Вернуть книгу
                 System.out.println("Реализация - Вернуть книгу");
