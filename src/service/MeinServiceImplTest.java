@@ -255,6 +255,20 @@ class MeinServiceImplTest {
                 Arguments.of(-5, -5)
         );
     }
-    // тест boolean returnBook(int bookId, int userId)
+
     // тест public Book addBook(String title, String author, String edition, int year)
+
+    // тест public Book getBookById(int id)
+    @ParameterizedTest
+    @ValueSource(ints = {1001, 1002, 1003})
+    void testGetBookByIdNotNull(int id) {
+        Assertions.assertNotNull(service.getBookById(id));
+        Assertions.assertEquals(id, service.getBookById(id).getId());
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1020, 1023})
+    void testGetBookByIdIsNull(int id) {
+        Assertions.assertNull(service.getBookById(id));
+    }
 }

@@ -87,4 +87,9 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return null;
     }
+
+    @Override
+    public MyList<User> getAllUsers() {
+        return users;
+    }
 }

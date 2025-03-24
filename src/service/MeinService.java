@@ -48,5 +48,7 @@ public interface MeinService {
     User getUserWhoTakeBook(int Id);
 
     User getActiveUser();
+
+    Book getBookById(int id);
 }
 
