@@ -46,8 +46,7 @@ public class MeinServiceImpl implements MeinService {
             return null;
         }
 
-        User user = userRepository.addUser(name, email, password);
-        return user;
+        return userRepository.addUser(name, email, password);
     }
 
     @Override
@@ -165,12 +164,6 @@ public class MeinServiceImpl implements MeinService {
             return null;
         }
         return bookRepository.getByAuthor(author);
-    }
-
-    // TODO
-    @Override
-    public MyList<Book> getUserBooks(int id) {
-        return null;
     }
 
 

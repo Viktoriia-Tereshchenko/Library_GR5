@@ -105,7 +105,8 @@ public class BookRepositoryImpl implements BookRepository {
 
         // признак, что книга выдана
         getById(book.getId()).setBusy(book.isBusy());
-        return book;
+
+        return getById(book.getId());
     }
 
     // TODO

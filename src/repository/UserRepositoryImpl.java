@@ -28,7 +28,10 @@ public class UserRepositoryImpl implements UserRepository {
         User user = new User(currentId.getAndIncrement(), "User Ivan", "2", "2");
         user.setRole(Role.READER);
 
-        users.addAll(admin, user);
+        User user2 = new User(currentId.getAndIncrement(), "User Petr", "3", "3");
+        user.setRole(Role.READER);
+
+        users.addAll(admin, user, user2);
     }
 
     @Override
