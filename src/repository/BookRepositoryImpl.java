@@ -29,10 +29,13 @@ public class BookRepositoryImpl implements BookRepository {
         );
     }
 
-    // TODO
     @Override
     public Book addBook(String title, String author, String edition, int year) {
-        return null;
+        Book book = new Book(currentId.getAndIncrement(), title, author, edition, year);
+
+        books.add(book);
+
+        return book;
     }
 
     @Override
@@ -85,7 +88,7 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public void saveBook(Book book) {
+    public Book saveBook(Book book) {
         // изменяемые поля
         // название
         getById(book.getId()).setTitle(book.getTitle());
@@ -102,6 +105,7 @@ public class BookRepositoryImpl implements BookRepository {
 
         // признак, что книга выдана
         getById(book.getId()).setBusy(book.isBusy());
+        return book;
     }
 
     // TODO
