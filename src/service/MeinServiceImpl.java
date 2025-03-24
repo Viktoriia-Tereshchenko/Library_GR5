@@ -156,9 +156,13 @@ public class MeinServiceImpl implements MeinService {
 
     @Override
     public Book addBook(String title, String author, String edition, int year) {
-        return null;
-    }
 
+       // проверка строк
+        if (title == null || author == null || edition == null || year > 1900) return null;
+
+        return bookRepository.addBook(title, author, edition, year);
+
+    }
 
     @Override
     public MyList<Book> getAllFreeBooks() {

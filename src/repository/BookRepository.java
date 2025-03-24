@@ -31,7 +31,7 @@ public interface BookRepository {
 
     //-------------------------------------------------
     // update
-    void saveBook(Book book);
+    Book saveBook(Book book);
 
     //-------------------------------------------------
     // delete
