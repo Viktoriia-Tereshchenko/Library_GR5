@@ -40,9 +40,12 @@ public class BookRepositoryImpl implements BookRepository {
         return books;
     }
 
-    // TODO
     @Override
     public Book getById(int id) {
+        for (Book book: books) {
+            if (book.getId() == id)
+                return book;
+        }
         return null;
     }
 
@@ -87,6 +90,9 @@ public class BookRepositoryImpl implements BookRepository {
     //  Редактирование информации о книге (только ADMIN)
     @Override
     public void saveBook(Book book) {
+        Book oldValues =
+
+
 
     }
 
