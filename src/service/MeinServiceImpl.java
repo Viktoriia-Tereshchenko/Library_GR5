@@ -188,7 +188,6 @@ public class MeinServiceImpl implements MeinService {
         if (title == null || author == null || edition == null || year > 1900) return null;
 
         return bookRepository.addBook(title, author, edition, year);
-
     }
 
     @Override

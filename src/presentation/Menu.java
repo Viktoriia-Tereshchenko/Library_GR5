@@ -246,7 +246,7 @@ public class Menu {
                 int inputId = scanner.nextInt();
                 scanner.nextLine();
 
-                if (service.takeBook(inputId, service.getActiveUser().getUserId())) {
+                if (service.returnBook(inputId, service.getActiveUser().getUserId())) {
                     System.out.println("Вы вернули книгу № " + inputId);
                 } else {
                     System.out.println("Невозможно вернуть книгу № " + inputId);
