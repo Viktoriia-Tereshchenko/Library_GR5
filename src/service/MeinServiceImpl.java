@@ -97,10 +97,15 @@ public class MeinServiceImpl implements MeinService {
         Book book = bookRepository.getById(bookId);
         User user = userRepository.getById(userId);
 
+        if (book == null || user == null) {
+            return false;
+        }
+
         if (!book.isBusy()) {
             System.out.println("Книга в библиотеке ");
             return false;
         }
+
 
         int index = -1;
         MyList<Book> usersBook = user.getUserBooks();
