@@ -18,9 +18,6 @@ public interface MeinService {
     // Поиск книги по автору (полное имя или часть имени)
     MyList<Book> getByAuthor(String author);
 
-    // Список книг, которые сейчас у пользователя - репозиторий ?
-    MyList<Book> getUserBooks(int id);
-
     // Список всех занятых книг, находящихся сейчас у читателей
     MyList<Book> getAllBusyBooks();
 

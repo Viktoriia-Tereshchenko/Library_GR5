@@ -268,7 +268,7 @@ public class Menu {
         while (true) {
             System.out.println("\n-------------------------------");
             System.out.println("Меню библиотекаря");
-            System.out.println("1. Добавление книги");
+            System.out.println("1. Добавить книгу");
             System.out.println("2. Список всех свободных книг");
             System.out.println("3. Список книг, которые сейчас у читателей");
             System.out.println("4. Каталог книг");
@@ -289,9 +289,7 @@ public class Menu {
 
         switch (choice) {
             case 1:
-                // TODO Реализация - Добавление книги
-                System.out.println("Реализация - Добавление книги");
-
+                System.out.println("--------Добавление книги--------");
                 System.out.println("Введите название книги:");
                 String title = scanner.nextLine();
 
@@ -310,7 +308,7 @@ public class Menu {
                 if (result == null) {
                     System.out.println("Книга не добавлена!");
                 } else {
-                    System.out.println("Вы успешно добавили книги!");
+                    System.out.println("Вы успешно добавили книгу в каталог!");
                 }
                 waitRead();
                 break;
