@@ -173,6 +173,37 @@ import static org.junit.jupiter.api.Assertions.*;
             Assertions.assertNotNull(service.getAllBusyBooks());
         }
 
+
+        //тест public MyList<Book> getAllBusyBooks()
+        @ParameterizedTest
+        @ValueSource(ints = {1})
+        void getGetAllBusyBooksNotNull(int size) {
+            service.loginUser("ivan@test.com", "qwerty1Q%S");
+            service.takeBook(1000, 4);
+            Assertions.assertNotNull(service.getAllBusyBooks());
+            Assertions.assertEquals(size, service.getAllBusyBooks().size());
+            //System.out.println(service.getUserBooks());
+        }
+
+        @ParameterizedTest
+        @ValueSource(ints = {0})
+        void getGetAllBusyBooksStartSize(int size) {
+            Assertions.assertNotNull(service.getAllBusyBooks());
+            Assertions.assertEquals(size, service.getAllBusyBooks().size());
+            //System.out.println(service.getAllBusyBooks());
+        }
+
+        @ParameterizedTest
+        @ValueSource(ints = {1, 2, 5})
+        void getGetAllBusyBooksIsEmpty(int size) {
+            Assertions.assertEquals(0, service.getAllBusyBooks().size());
+            Assertions.assertNotEquals(size, service.getAllBusyBooks().size());
+            Assertions.assertNotNull(service.getAllBusyBooks());
+            System.out.println(service.getAllBusyBooks());
+            System.out.println(service.getAllBusyBooks().size());
+
+        }
+
         // тест public MyList<Book> getByTitle(String title)
         @ParameterizedTest
         @ValueSource(strings = {"кол", "анна", "АФ", "Кри"})
@@ -269,5 +300,32 @@ import static org.junit.jupiter.api.Assertions.*;
         void testGetBookByIdIsNull(int id) {
             Assertions.assertNull(service.getBookById(id));
         }
+
+        @ParameterizedTest
+        @ValueSource(ints = {1000, 1001, 1003})
+        void testGetUserWhoTakeBookCorrectId(int id) {
+            service.loginUser("ivan@test.com", "qwerty1Q%S");
+            service.takeBook(id, 4);
+            Assertions.assertNotNull(service.getUserWhoTakeBook(id));
+            System.out.println(service.getUserWhoTakeBook(id));
+        }
+
+        @ParameterizedTest
+        @ValueSource(ints = {-5550, 0, 85, 1020})
+        void testGetUserWhoTakeBookNotCorrectId(int id) {
+            service.loginUser("ivan@test.com", "qwerty1Q%S");
+            service.takeBook(id, 4);
+            Assertions.assertNull(service.getUserWhoTakeBook(id));
+            System.out.println(service.getUserWhoTakeBook(id));
+        }
+
+        @ParameterizedTest
+        @ValueSource(ints = {1000, 1001})
+        void testGetUserWhoTakeBookInLibrary(int id) {
+            service.loginUser("ivan@test.com", "qwerty1Q%S");
+            Assertions.assertNull(service.getUserWhoTakeBook(id));
+            System.out.println(service.getUserWhoTakeBook(id));
+        }
+
     }
   
