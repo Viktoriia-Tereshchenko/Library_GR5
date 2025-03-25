@@ -233,7 +233,7 @@ public class MeinServiceImpl implements MeinService {
             return null;
         }
 
-        return bookRepository.addBook(title, author, edition, year);
+        return bookRepository.addBook(title.trim(), author.trim(), edition.trim(), year);
     }
 
     @Override
