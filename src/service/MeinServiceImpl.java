@@ -73,6 +73,11 @@ public class MeinServiceImpl implements MeinService {
 
     @Override
     public boolean takeBook(int bookId, int userId) {
+
+        if (bookId < 1000) {
+            System.out.println("Некорректный № книги!");
+            return false;
+        }
         Book book = bookRepository.getById(bookId);
         User user = userRepository.getById(userId);
 
@@ -93,6 +98,12 @@ public class MeinServiceImpl implements MeinService {
 
     @Override
     public boolean returnBook(int bookId, int userId) {
+
+        if (bookId < 1000) {
+            System.out.println("Некорректный № книги!");
+            return false;
+        }
+
         Book book = bookRepository.getById(bookId);
         User user = userRepository.getById(userId);
 
