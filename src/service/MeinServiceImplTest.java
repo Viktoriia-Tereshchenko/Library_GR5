@@ -256,8 +256,6 @@ class MeinServiceImplTest {
         );
     }
 
-    // тест public Book addBook(String title, String author, String edition, int year)
-
     // тест public Book getBookById(int id)
     @ParameterizedTest
     @ValueSource(ints = {1001, 1002, 1003})
