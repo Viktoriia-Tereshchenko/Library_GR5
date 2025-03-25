@@ -207,15 +207,19 @@ public class MeinServiceImpl implements MeinService {
        // проверка строк
         if (title == null || title.trim().isEmpty()) {
             System.out.println("Ошибка. Введите название книги");
+            return null;
         }
         if (author == null || author.trim().isEmpty()){
             System.out.println("Ошибка. Введите имя автора");
+            return null;
         }
         if (edition == null || edition.trim().isEmpty()) {
             System.out.println("Ошибка. Введите название издания");
+            return  null;
         }
         if (year <= 1450 || year > java.time.Year.now().getValue()) {
             System.out.println("Ошибка. Некорректный год выпуска");
+            return null;
         }
 
         return bookRepository.addBook(title, author, edition, year);
