@@ -256,7 +256,7 @@ class MeinServiceImplTest {
         );
     }
 
-    // тест public Book getBookById(int id)
+     // тест public Book getBookById(int id)
     @ParameterizedTest
     @ValueSource(ints = {1001, 1002, 1003})
     void testGetBookByIdNotNull(int id) {
