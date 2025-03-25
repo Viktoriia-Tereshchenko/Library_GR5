@@ -56,7 +56,7 @@ public class BookRepositoryImpl implements BookRepository {
     public MyList<Book> getByTitle(String title) {
         MyList<Book> result = new MyArrayList<>();
         for (Book book : books) {
-            if (book.getTitle().toLowerCase().contains(title.toLowerCase())) {
+            if (book.getTitle().toLowerCase().contains(title.trim().toLowerCase())) {
                 result.add(book);
             }
         }
@@ -70,7 +70,7 @@ public class BookRepositoryImpl implements BookRepository {
 
         for (Book book : books) {
 
-            if (book.getAuthor().toLowerCase().contains(author.toLowerCase())) {
+            if (book.getAuthor().toLowerCase().contains(author.trim().toLowerCase())) {
                 result.add(book);
             }
         }
